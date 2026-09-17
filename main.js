@@ -378,7 +378,7 @@ async function highlightLuckySymbols() {
   playCoinRain();
 
   await wait(1300);
-  // showFinalPopup();
+  showFinalPopup();
 }
 
 const randomBetween = (min, max) => min + Math.random() * (max - min);
