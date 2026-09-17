@@ -36,10 +36,10 @@ const spinQueue = [
     ["7.webp", "9.webp", "8.webp"],
   ],
   [
-    ["6.webp", "11.webp", "7.webp"],
+    ["6.webp", "7.webp", "11.webp"],
     ["9.webp", "11.webp", "5.webp"],
     ["8.webp", "11.webp", "1.webp"],
-    ["7.webp", "11.webp", "9.webp"],
+    ["11.webp", "7.webp", "9.webp"],
   ],
 ];
 
@@ -291,7 +291,7 @@ async function spin() {
     animWinLines();
     await waitForFiniteAnimations([
       document.getElementById("lines"),
-      document.getElementById("center-line"),
+      document.getElementById("main-line"),
     ]);
 
     await highlightLuckySymbols();
@@ -300,10 +300,10 @@ async function spin() {
 
 function animWinLines() {
   const lines = document.getElementById("lines");
-  const centerLine = document.getElementById("center-line");
+  const mainLine = document.getElementById("main-line");
 
   lines.classList.add("show");
-  centerLine.classList.add("show");
+  mainLine.classList.add("show");
 }
 
 function initStart() {
@@ -359,7 +359,7 @@ async function highlightLuckySymbols() {
   slotMachine.classList.add("shake");
   await waitForFiniteAnimations([slotMachine]);
 
-  document.getElementById("center-line").classList.add("win-pulse");
+  document.getElementById("main-line").classList.add("win-pulse");
 
   reels.forEach((reel) => {
     const boxes = reel.querySelectorAll(".box");
@@ -378,7 +378,7 @@ async function highlightLuckySymbols() {
   playCoinRain();
 
   await wait(1300);
-  showFinalPopup();
+  // showFinalPopup();
 }
 
 const randomBetween = (min, max) => min + Math.random() * (max - min);

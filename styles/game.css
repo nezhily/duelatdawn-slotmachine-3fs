@@ -163,13 +163,13 @@
   clip-path: inset(0 50% 0 50%);
 }
 
-#center-line {
+#main-line {
   position: absolute;
   z-index: 200;
 
-  width: 100%;
-  top: 4.3rem;
-  left: 0.05rem;
+  width: 97%;
+  top: 0.5rem;
+  left: 0.3rem;
 
   clip-path: inset(0 50% 0 50%);
 }
@@ -187,20 +187,20 @@
   }
 }
 
-#center-line.show {
+#main-line.show {
   animation: showLines 0.5s ease-in forwards;
 }
 
-#center-line.show.win-pulse {
+#main-line.show.win-pulse {
   clip-path: inset(0 0 0 0);
-  animation: pulseCenterLine 0.4s ease-in infinite alternate;
+  animation: pulseMainLine 0.4s ease-in infinite alternate;
 }
-@keyframes pulseCenterLine {
+@keyframes pulseMainLine {
   0% {
     filter: none;
   }
   100% {
-    filter: brightness(1.5) ;
+    filter: brightness(1.5);
   }
 }
 
