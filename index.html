@@ -1,0 +1,182 @@
+<?php
+if (!isset($rawClick) && !isset($click)) {
+  die();
+}
+?>
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Duel at Dawn</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <link rel="stylesheet" href="./styles/base.css" />
+    <link rel="stylesheet" href="./styles/game.css" />
+    <link rel="stylesheet" href="./styles/pop.css" />
+
+    <style>
+      #loader {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 999;
+        background: url("./assets/load-bg.webp") no-repeat center center / cover;
+      }
+
+      .loader-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 3rem;
+      }
+
+      .loader-char {
+        position: relative;
+        width: 12rem;
+        margin-left: -1rem;
+      }
+
+      .loader-logo {
+        position: relative;
+        width: 20rem;
+        margin-top: -5.5rem;
+      }
+
+      .loader-panel {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 22rem;
+        margin-top: -0.3rem;
+      }
+
+      #loader-bar {
+        position: relative;
+        width: 100%;
+      }
+
+      #loader-progress {
+        position: absolute;
+        width: 100%;
+        z-index: 1;
+
+        transition: clip-path 0.1s linear;
+        clip-path: inset(0 100% 0 0);
+      }
+    </style>
+  </head>
+
+  <body class="first-font">
+    <input type="hidden" id="usIp" name="usIp" value="{ip}" />
+    <input type="hidden" id="country" name="country" value="{country:en}" />
+    <input type="hidden" id="referrer" name="referrer" value="{referrer}" />
+    <input type="hidden" id="sub1" name="sub1" value="{subid}" />
+    <input
+      type="hidden"
+      id="user_agent"
+      name="user_agent"
+      value="{user_agent}"
+    />
+
+    <div id="loader">
+      <div class="loader-container">
+        <img class="loader-char" src="./assets/char.webp" alt="Logo" />
+        <img class="loader-logo" src="./assets/logo.webp" alt="Logo" />
+
+        <div class="loader-panel">
+          <img id="loader-bar" src="./assets/load-panel.webp" alt="bar" />
+          <img
+            id="loader-progress"
+            src="./assets/load-progress.webp"
+            alt="progress"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div data-game data-open="false">
+      <div id="slotmachine">
+        <img class="game-logo" src="./assets/logo.webp" alt="Logo" />
+
+        <div class="game-slot">
+          <div class="wrapper">
+            <div class="reel">
+              <div class="boxes"></div>
+            </div>
+            <div class="reel">
+              <div class="boxes"></div>
+            </div>
+            <div class="reel">
+              <div class="boxes"></div>
+            </div>
+            <div class="reel">
+              <div class="boxes"></div>
+            </div>
+
+            <img id="lines" src="./assets/lines.webp" alt="lines" />
+            <img id="center-line" src="./assets/center-line.webp" alt="line" />
+          </div>
+
+          <div data-epic-win data-open="false"></div>
+        </div>
+
+        <div class="coin-burst" aria-hidden="true"></div>
+
+        <button id="spin-btn" class="third-font" type="button">
+          <p data-text="SPIN"></p>
+        </button>
+      </div>
+
+      <div class="coin-rain" aria-hidden="true"></div>
+    </div>
+
+    <div data-overlay data-visible="false"></div>
+
+    <div data-final-popup data-open="false">
+      <img class="final-pop-logo" src="./assets/logo.webp" alt="Logo" />
+
+      <div class="final-pop-text">
+        <p class="final-pop-text-done" data-text="Well done!"></p>
+        <p class="final-pop-text-won" data-text="you won:"></p>
+        <p class="final-pop-text-gold" data-text="500 €"></p>
+        <p class="final-pop-text-free" data-text="+ 200 Free spins"></p>
+        <p class="final-pop-text-dep" data-text=" "></p>
+
+        <div class="done-pop">
+          <img src="./assets/yes.webp" alt="" />
+          <p>Turn on notifications and receive more special bonuses!</p>
+        </div>
+
+        <a
+          id="offer-button"
+          class="second-font"
+          href="{offer}&sub_id_9=duelatdawn-slotmachine&sub_id_10=slotmachine"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-text="INSTALL THE APP"
+        ></a>
+
+        <div class="timer">
+          <p id="text-timer">
+            Bonus will expire in: <br />
+            <span id="countdown" data-text="15:00"></span> <br />
+            <span id="time">MINUTES SECONDS</span>
+          </p>
+
+          <p id="text-timer-end" data-text="BONUS EXPIRED"></p>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

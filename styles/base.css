@@ -1,0 +1,103 @@
+@font-face {
+  font-family: "ChangaOne";
+  src: url("../fonts/ChangaOne.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal italic;
+}
+@font-face {
+  font-family: "BowlbyOne";
+  src: url("../fonts/BowlbyOne-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Staatliches";
+  src: url("../fonts/Staatliches-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+.first-font {
+  font-family: "ChangaOne", sans-serif;
+  font-weight: 400;
+}
+.second-font {
+  font-family: "BowlbyOne", sans-serif;
+  font-weight: 400;
+}
+.third-font {
+  font-family: "Staatliches", sans-serif;
+  font-weight: 400;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+html {
+  font-size: 4.3vw;
+}
+@media (orientation: portrait) and (min-width: 500px) {
+  html {
+    font-size: 2.4vh;
+  }
+}
+@media (orientation: landscape) {
+  html {
+    font-size: 2.4vh;
+  }
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+img {
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
+p {
+  margin: 0;
+}
+
+.fixLetter {
+  font-weight: 800;
+  font-size: 0.89em;
+}
+
+.fixWord {
+  font-weight: 800;
+}
+
+a,
+button {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  text-decoration: none;
+  color: transparent;
+  text-shadow: none;
+  text-align: center;
+  will-change: transform, filter;
+  z-index: 10;
+}

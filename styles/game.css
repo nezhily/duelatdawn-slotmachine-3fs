@@ -1,0 +1,343 @@
+[data-game] {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: url("../assets/bg.webp") no-repeat center center / cover;
+  overflow: hidden;
+}
+
+[data-game][data-open="false"] {
+  opacity: 0;
+  pointer-events: none;
+}
+[data-game][data-open="true"] {
+  opacity: 1;
+  pointer-events: all;
+}
+
+#slotmachine {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 24rem;
+  height: 43rem;
+  background: url("../assets/slotmachine.webp") no-repeat center / 100%;
+}
+
+#slotmachine.shake {
+  animation: shakeSlotMachine 0.5s forwards;
+}
+
+@keyframes shakeSlotMachine {
+  0% {
+    transform: rotate(-2deg);
+  }
+  10% {
+    transform: rotate(2deg);
+  }
+  20% {
+    transform: rotate(-2deg);
+  }
+  30% {
+    transform: rotate(2deg);
+  }
+  40% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+  60% {
+    transform: rotate(-2deg);
+  }
+  70% {
+    transform: rotate(2deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.game-logo {
+  position: relative;
+  width: 14rem;
+  z-index: 1;
+  margin-top: 1.1rem;
+
+  animation: animLogo 3s infinite ease-in;
+  transform-origin: top;
+}
+
+.game-slot {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 12rem;
+  flex-shrink: 0;
+}
+
+.wrapper {
+  position: relative;
+  display: flex;
+  margin-top: -0.85rem;
+}
+
+.reel {
+  width: 3.85rem;
+  height: 9.45rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.boxes {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.box {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  margin: -0.15rem 0 -0.2rem;
+}
+
+.box img {
+  width: 3.4rem;
+  height: 3.4rem;
+  object-fit: contain;
+  z-index: 100;
+  will-change: transform, filter;
+}
+
+.box.lucky-bounce {
+  animation: luckyBounce 0.3s ease-out forwards;
+}
+
+@keyframes luckyBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-0.3rem);
+  }
+}
+
+.box.lucky-container {
+  animation: luckyScale 0.4s ease-in infinite alternate;
+}
+
+@keyframes luckyScale {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1);
+    filter: brightness(1.3);
+  }
+}
+
+#lines {
+  position: absolute;
+  z-index: 199;
+
+  width: 97%;
+  top: 0.5rem;
+  left: 0.3rem;
+
+  clip-path: inset(0 50% 0 50%);
+}
+
+#center-line {
+  position: absolute;
+  z-index: 200;
+
+  width: 100%;
+  top: 4.3rem;
+  left: 0.05rem;
+
+  clip-path: inset(0 50% 0 50%);
+}
+
+#lines.show {
+  animation: showLines 0.4s ease-in forwards;
+}
+
+@keyframes showLines {
+  0% {
+    clip-path: inset(0 50% 0 50%);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+#center-line.show {
+  animation: showLines 0.5s ease-in forwards;
+}
+
+#center-line.show.win-pulse {
+  clip-path: inset(0 0 0 0);
+  animation: pulseCenterLine 0.4s ease-in infinite alternate;
+}
+@keyframes pulseCenterLine {
+  0% {
+    filter: none;
+  }
+  100% {
+    filter: brightness(1.5) ;
+  }
+}
+
+#spin-btn {
+  width: 10.3rem;
+  height: 7rem;
+
+  background: url("../assets/red-button.webp") no-repeat center / 100%;
+
+  padding-bottom: 1.7rem;
+  perspective: 800px;
+  transform-origin: bottom;
+  animation: scaleBtn 0.75s infinite ease-in-out alternate;
+
+  font-size: 4rem;
+
+  margin-top: 0.8rem;
+}
+
+@keyframes scaleBtn {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.02);
+  }
+}
+
+#spin-btn p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  transform: rotateX(70deg) scaleY(3.5);
+  margin-left: -0.05rem;
+}
+
+#spin-btn p::after {
+  content: attr(data-text);
+  position: absolute;
+  background: #ffffff;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  z-index: 1;
+}
+
+#spin-btn p::before {
+  content: attr(data-text);
+  position: absolute;
+
+  -webkit-text-stroke: 0.15rem #390808;
+  text-shadow: 0 0.13rem 0.1rem rgba(45, 18, 3, 0.58);
+}
+
+#spin-btn.disabled {
+  padding-top: 0.2rem;
+  background: url("../assets/red-button-dis.webp") no-repeat center / 100%;
+  cursor: not-allowed;
+  animation: none;
+  pointer-events: none;
+}
+
+#spin-btn.disabled p::after {
+  content: attr(data-text);
+  position: absolute;
+  background: rgba(255, 255, 255, 0.3);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  z-index: 1;
+}
+
+[data-epic-win] {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 13rem;
+  height: 3rem;
+  background: url("../assets/epic-banner.webp") no-repeat center top 50% / 100%;
+  transition: opacity 0.3s ease;
+  will-change: filter, transform;
+  margin-top: -5rem;
+}
+
+[data-epic-win][data-open="false"] {
+  opacity: 0;
+}
+
+[data-epic-win][data-open="true"] {
+  z-index: 400;
+  opacity: 1;
+  animation: epicBannerFilter 0.4s ease-in infinite alternate;
+}
+
+@keyframes epicBannerFilter {
+  0% {
+    filter: brightness(1);
+  }
+  100% {
+    filter: brightness(1.3);
+    transform: scale(1.02);
+  }
+}
+
+.coin-burst {
+  position: absolute;
+  inset: 0;
+  z-index: 350;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.coin-rain {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 700;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.win-coin {
+  position: absolute;
+  top: 19rem;
+  left: 50%;
+  width: var(--coin-size);
+  height: var(--coin-size);
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  will-change: transform, opacity, filter;
+  filter: drop-shadow(0 0.15rem 0.1rem rgba(28, 9, 0, 0.65));
+}
+
+.win-coin img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
