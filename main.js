@@ -7,6 +7,8 @@ const spinBtn = document.getElementById("spin-btn");
 const reels = document.querySelectorAll(".reel");
 
 const slotMachine = document.getElementById("slotmachine");
+const lines = document.getElementById("lines");
+const mainLine = document.getElementById("main-line");
 const epicBanner = document.querySelector("[data-epic-win]");
 const coinBurst = document.querySelector(".coin-burst");
 const coinRain = document.querySelector(".coin-rain");
@@ -182,7 +184,7 @@ async function preloadGameResources() {
   });
 }
 
-let spinsLeft = 3;
+let spinIndex = 1;
 let spinning = false;
 let coinRainTimer = null;
 
@@ -191,14 +193,12 @@ spinBtn.addEventListener("click", spin);
 async function spin() {
   spinBtn.classList.add("disabled");
 
-  if (spinning || spinsLeft === 0) return;
+  if (spinning || spinIndex >= spinQueue.length) return;
   spinning = true;
-  spinsLeft--;
 
-  const isLastSpin = spinsLeft === 0;
+  const isLastSpin = spinIndex === spinQueue.length - 1;
   const spinPromises = [];
-  const spinIndex = 3 - (spinsLeft + 1);
-  const currentSpinResults = spinQueue[spinIndex + 1];
+  const currentSpinResults = spinQueue[spinIndex++];
   const delayBetweenReels = 100;
 
   for (let i = 0; i < reels.length; i++) {
@@ -289,19 +289,12 @@ async function spin() {
     await waitForFiniteAnimations(luckyBoxes);
 
     animWinLines();
-    await waitForFiniteAnimations([
-      document.getElementById("lines"),
-      document.getElementById("main-line"),
-    ]);
-
+    await waitForFiniteAnimations([lines, mainLine]);
     await highlightLuckySymbols();
   }
 }
 
 function animWinLines() {
-  const lines = document.getElementById("lines");
-  const mainLine = document.getElementById("main-line");
-
   lines.classList.add("show");
   mainLine.classList.add("show");
 }
@@ -359,7 +352,7 @@ async function highlightLuckySymbols() {
   slotMachine.classList.add("shake");
   await waitForFiniteAnimations([slotMachine]);
 
-  document.getElementById("main-line").classList.add("win-pulse");
+  mainLine.classList.add("win-pulse");
 
   reels.forEach((reel) => {
     const boxes = reel.querySelectorAll(".box");
